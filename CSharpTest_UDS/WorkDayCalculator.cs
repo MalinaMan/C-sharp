@@ -11,12 +11,12 @@ namespace CSharpTest
         public DateTime Calculate(DateTime startDate, int dayCount, WeekEnd[] weekEnds)
         {
             DateTime tempDate = startDate;
-            short i = 2;
+            short i = 0, days = 0;
             bool success;
 
-            while (i <= dayCount)
+            do
             {
-                tempDate = tempDate.AddDays(1);
+                tempDate = startDate.AddDays(days);
                 success = true;
                 foreach (WeekEnd day in weekEnds ?? Enumerable.Empty<WeekEnd>())
                 {
@@ -26,9 +26,9 @@ namespace CSharpTest
                         break;
                     }
                 }
-                if (success)
-                    i++;
-            }
+                if (success) i++;
+                days++;
+            } while (i < dayCount);
 
             return tempDate;
 
