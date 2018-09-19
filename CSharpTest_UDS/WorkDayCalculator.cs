@@ -12,21 +12,11 @@ namespace CSharpTest
         {
             DateTime tempDate = startDate;
             short i = 0, days = 0;
-            bool success;
 
             do
             {
                 tempDate = startDate.AddDays(days);
-                success = true;
-                foreach (WeekEnd day in weekEnds ?? Enumerable.Empty<WeekEnd>())
-                {
-                    if (tempDate >= day.StartDate && tempDate <= day.EndDate)
-                    {
-                        success = false;
-                        break;
-                    }
-                }
-                if (success) i++;
+                if (!WeekEnd.isDayInWeekend(tempDate, weekEnds)) i++;
                 days++;
             } while (i < dayCount);
 

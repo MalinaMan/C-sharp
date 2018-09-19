@@ -16,5 +16,19 @@ namespace CSharpTest
             StartDate = startDate;
             EndDate = endDate;
         }
+
+        static public bool isDayInWeekend(DateTime tempDate, WeekEnd[] weekEnds)
+        {
+            bool included = false;
+            foreach (WeekEnd day in weekEnds ?? Enumerable.Empty<WeekEnd>())
+            {
+                if (tempDate >= day.StartDate && tempDate <= day.EndDate)
+                {
+                    included = true;
+                    break;
+                }
+            }
+            return included;
+        }
     }
 }
